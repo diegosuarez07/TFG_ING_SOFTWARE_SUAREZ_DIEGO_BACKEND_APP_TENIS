@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Diego Suarez
+      changes:
+        - createTable:
+            tableName: APP_USER
+            columns:
+              - column:
+                  name: USER_ID
+                  type: BIGSERIAL
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    autoIncrement: true
+                    startWith: 1
+                    incrementBy: 1
+              - column:
+                  name: FIRST_NAME
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: LAST_NAME
+                  type: VARCHAR(100)
+                  constraints:
+                    false
+              - column:
+                  name: EMAIL
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PASSWORD
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: USER_TYPE
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: SKILL_LEVEL_GAME
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: REGISTRATION_DATE
+                  type: DATE
+                  constraints:
+                    nullable: false
