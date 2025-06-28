@@ -1,0 +1,132 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Diego Suarez
+      changes:
+        - createTable:
+            tableName: COURT
+            columns:
+              - column:
+                  name: COURT_ID
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    autoIncrement: true
+              - column:
+                  name: COURT_NUMBER
+                  type: INT
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: COURT_NAME
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: SURFACE_TYPE
+                  type: VARCHAR(50)
+              - column:
+                  name: STATUS
+                  type: VARCHAR(20)
+
+        - createTable:
+            tableName: TIMESLOT
+            columns:
+              - column:
+                  name: TIMESLOT_ID
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    autoIncrement: true
+              - column:
+                  name: COURT_ID
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_timeslot_court
+                    references: COURT(COURT_ID)
+              - column:
+                  name: DATE
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: START_TIME
+                  type: TIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: END_TIME
+                  type: TIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: STATUS
+                  type: VARCHAR(20)
+
+        - createTable:
+            tableName: COURT_BOOKING
+            columns:
+              - column:
+                  name: BOOKING_ID
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    autoIncrement: true
+              - column:
+                  name: USER_ID
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_booking_user
+                    references: APP_USER(USER_ID)
+              - column:
+                  name: TIMESLOT_ID
+                  type: BIGSERIAL
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_booking_timeslot
+                    references: TIMESLOT(TIMESLOT_ID)
+              - column:
+                  name: BOOKING_DATE
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: STATUS
+                  type: VARCHAR(20)
+
+        - insert:
+            tableName: COURT
+            columns:
+              - column:
+                  name: COURT_NUMBER
+                  value: 1
+              - column:
+                  name: COURT_NAME
+                  value: "Guillermo Vilas"
+              - column:
+                  name: SURFACE_TYPE
+                  value: "Polvo de Ladrillo"
+              - column:
+                  name: STATUS
+                  value: "EXCELENTE"
+
+        - insert:
+            tableName: COURT
+            columns:
+              - column:
+                  name: COURT_NUMBER
+                  value: 2
+              - column:
+                  name: COURT_NAME
+                  value: "Gabriela Sabattini"
+              - column:
+                  name: SURFACE_TYPE
+                  value: "Cemento"
+              - column:
+                  name: STATUS
+                  value: "EXCELENTE"
