@@ -42,4 +42,10 @@ public class TournamentController {
         List<TournamentResponseDto> tournaments = tournamentService.getAvailableTournaments();
         return ResponseEntity.ok(tournaments);
     }
+
+    @GetMapping
+    public ResponseEntity<List<TournamentResponseDto>> getAllTournaments() {
+        List<TournamentResponseDto> tournaments = tournamentService.getAllTournaments();
+        return ResponseEntity.ok(tournaments);
+    }
 }

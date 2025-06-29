@@ -85,4 +85,27 @@ public class TournamentServiceImpl implements TournamentService {
                 ))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<TournamentResponseDto> getAllTournaments() {
+        List<Tournament> tournaments = tournamentRepository.findAll();
+        // Mapea cada Tournament a TournamentResponseDto
+        return tournaments.stream()
+                .map(this::mapToResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    private TournamentResponseDto mapToResponseDto(Tournament tournament) {
+        return new TournamentResponseDto(
+                tournament.getTournamentId(),
+                tournament.getName(),
+                tournament.getCategory(),
+                tournament.getRegistrationStartDate(),
+                tournament.getRegistrationEndDate(),
+                tournament.getTournamentStartDate(),
+                tournament.getTournamentEndDate(),
+                tournament.getMaxPlayers(),
+                tournament.getCreatedBy()
+        );
+    }
 }

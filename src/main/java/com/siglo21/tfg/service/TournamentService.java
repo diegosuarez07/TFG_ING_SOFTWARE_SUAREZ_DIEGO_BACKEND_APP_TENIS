@@ -10,5 +10,6 @@ public interface TournamentService {
 
     Tournament createTournament(TournamentRequestDto requestDto);
     List<TournamentResponseDto> getAvailableTournaments();
+    public List<TournamentResponseDto> getAllTournaments();
 
 }
