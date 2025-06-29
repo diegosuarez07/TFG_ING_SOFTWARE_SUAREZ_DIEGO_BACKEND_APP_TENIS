@@ -22,7 +22,7 @@ public class TimeslotGeneratorService {
     private final CourtRepository courtRepository;
 
     // Se ejecuta automáticamente cada día a las 12:11 pm
-    @Scheduled(cron = "0 19 12 * * ?")
+    @Scheduled(cron = "0 54 23 * * ?")
     public void generateTimeslotsAutomatically() {
         log.info("Iniciando generación automática de horarios...");
         generateTimeslotsForNextDays(7); // Generar para los próximos 7 días

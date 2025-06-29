@@ -17,6 +17,7 @@ import java.util.UUID;
 public class Timeslot {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TIMESLOT_ID")
     private Long timeslotId;
 

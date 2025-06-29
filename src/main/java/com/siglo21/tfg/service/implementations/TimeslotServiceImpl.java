@@ -68,6 +68,7 @@ public class TimeslotServiceImpl implements TimeslotService {
             String statusEsp = TimeslotStatus.fromDbValue(timeslot.getStatus()).getDisplayValue();
             String courtName = timeslot.getCourt() != null ? timeslot.getCourt().getCourtName() : "";
             return new TimeslotResponseDto(
+                    timeslot.getTimeslotId(),
                     timeslot.getDate().toString(),
                     timeslot.getStartTime().toString().substring(0,5),
                     timeslot.getEndTime().toString().substring(0,5),

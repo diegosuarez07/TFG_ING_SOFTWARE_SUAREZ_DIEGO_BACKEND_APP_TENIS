@@ -32,11 +32,11 @@ public class CourtBooking {
     @Column(name = "STATUS", length = 20)
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "TIMESLOT_ID", insertable = false, updatable = false)
     private Timeslot timeslot;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID", insertable = false, updatable = false)
     private User user;
 

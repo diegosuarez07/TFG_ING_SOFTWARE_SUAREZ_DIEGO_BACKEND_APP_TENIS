@@ -1,0 +1,85 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: Diego Suarez
+      changes:
+        - createTable:
+            tableName: TOURNAMENT
+            columns:
+              - column:
+                  name: TOURNAMENT_ID
+                  type: SERIAL
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: NAME
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CATEGORY
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: REGISTRATION_START_DATE
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: REGISTRATION_END_DATE
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: TOURNAMENT_START_DATE
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: TOURNAMENT_END_DATE
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: MAX_PLAYERS
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CREATED_BY
+                  type: SERIAL
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_tournament_user
+                    references: APP_USER(USER_ID)
+
+        - createTable:
+            tableName: TOURNAMENT_REGISTRATION
+            columns:
+              - column:
+                  name: REGISTRATION_ID
+                  type: SERIAL
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: USER_ID
+                  type: SERIAL
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_registration_user
+                    references: APP_USER(USER_ID)
+              - column:
+                  name: TOURNAMENT_ID
+                  type: SERIAL
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_registration_tournament
+                    references: TOURNAMENT(TOURNAMENT_ID)
+              - column:
+                  name: REGISTRATION_DATE
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
