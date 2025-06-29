@@ -1,6 +1,7 @@
 package com.siglo21.tfg.repository;
 
 import com.siglo21.tfg.entity.Timeslot;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -31,4 +32,9 @@ public interface TimeslotRepository extends JpaRepository<Timeslot, Long> {
     @Modifying
     @Query("UPDATE Timeslot t SET t.status = :status WHERE t.timeslotId = :timeslotId")
     void updateStatus(@Param("timeslotId") Long timeslotId, @Param("status") String status);
+
+    @Modifying
+    @Query("DELETE FROM Timeslot t WHERE t.date < :date")
+    @Transactional
+    int deleteByDateBefore(@Param("date") LocalDate date);
 }
