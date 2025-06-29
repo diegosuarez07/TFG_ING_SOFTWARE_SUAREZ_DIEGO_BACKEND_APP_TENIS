@@ -35,10 +35,15 @@ public class UserServiceImpl implements UserService {
             if (user != null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El usuario ya se encuentra registrado");
             } else {
-                user = userMapper.fromRequest(requestDto);
-                user.setRegistrationDate(LocalDate.now());
+                user = new User();
+                user.setFirstName(requestDto.getFirstName());
+                user.setLastName(requestDto.getLastName());
+                user.setEmail(requestDto.getEmail());
                 String hashedPassword = passwordEncoder.encode(requestDto.getPassword());
                 user.setPassword(hashedPassword);
+                user.setUserType(requestDto.getUserType());
+                user.setSkillLevelGame(requestDto.getSkillLevelGame());
+                user.setRegistrationDate(LocalDate.now());
                 userRepository.save(user);
             }
         } catch (Exception ex) {
